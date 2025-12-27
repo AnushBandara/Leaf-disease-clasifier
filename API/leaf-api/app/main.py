@@ -7,21 +7,12 @@ from PIL import Image
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 MODEL_PATH_POTATO = os.path.join(
-    BASE_DIR,
-    "..",
-    "Models",
-    "Final",
-    "Potato",
-    "potato_model.keras",
+    BASE_DIR, "Models", "Final", "Potato", "potato_model.keras"
 )
 MODEL_PATH_TOMATO = os.path.join(
-    BASE_DIR,
-    "..",
-    "Models",
-    "Final",
-    "Tomato",
-    "tomato_model.keras",
+    BASE_DIR, "Models", "Final", "Tomato", "tomato_model.keras"
 )
 
 POTATO_MODEL = tf.keras.models.load_model(MODEL_PATH_POTATO)
@@ -74,7 +65,3 @@ async def predict_tomato_disease(file: UploadFile = File(...)):
     confidence = float(np.max(predictions[0]))
 
     return {"disease": predicted_class, "confidence": confidence}
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="localhost", port=8000)
